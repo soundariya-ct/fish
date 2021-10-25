@@ -23,8 +23,9 @@ class AppBannerController extends Controller
 
     public function index()
     {
-        $datas = $this->appBanner->orderBy('id','DESC')->paginate(25);
-        return view('admin.app-banner.index',compact('datas'));
+        $datas['posts'] = BannerApp::orderBy('id','desc')->paginate(5);
+
+        return view('admin.app-banner.index', $datas);
     }
 
     /**
@@ -32,10 +33,10 @@ class AppBannerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-
-    }
+    // public function create()
+    // {
+    //     return view('admin.app-banner.create');
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -45,7 +46,14 @@ class AppBannerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->hasFile('banner_image')) {
+            $path = $request->file('banner_image')->store('public/images');
+        }
+        $save = new BannerApp;
+        $save->banner_image = $path;
+        $save->save();
+
+       return redirect()->route('admin.app-banner.index');
     }
 
     /**
@@ -67,7 +75,7 @@ class AppBannerController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.app-banner.edit', compact('id'));
     }
 
     /**
@@ -79,7 +87,19 @@ class AppBannerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = BannerApp::find($id);
+        if($request->hasFile('banner_image')){
+            $request->validate([
+              'banner_image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            ]);
+            $path = $request->file('banner_image')->store('public/images');
+            $post->banner_image = $path;
+        }
+        dd($post);
+        $post->update();
+
+        return redirect()->route('admin.app-banner.index')
+        ->with('success','Post updated successfully');
     }
 
     /**

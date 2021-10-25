@@ -142,6 +142,4 @@
     </div>
 <!-- END: Content-->
 @endsection
-@push('scripts')
-
-@endpush
+ 
