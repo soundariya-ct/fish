@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BannerApp;
+use App\Models\Product;
 
 class AppBannerController extends Controller
 {
@@ -24,6 +25,7 @@ class AppBannerController extends Controller
     public function index()
     {
         $datas['posts'] = BannerApp::orderBy('id','desc')->paginate(5);
+        $datas['products'] = Product::pluck('english_name', 'id')->toArray();
 
         return view('admin.app-banner.index', $datas);
     }
@@ -45,12 +47,13 @@ class AppBannerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    { 
         if ($request->hasFile('banner_image')) {
             $path = $request->file('banner_image')->store('public/images');
         }
         $save = new BannerApp;
         $save->banner_image = $path;
+        $save->product_id = $request->product_id;
         $save->save();
 
        return redirect()->route('admin.app-banner.index');
@@ -95,8 +98,8 @@ class AppBannerController extends Controller
             $path = $request->file('banner_image')->store('public/images');
             $post->banner_image = $path;
         }
-        dd($post);
-        $post->update();
+
+        $post->save();
 
         return redirect()->route('admin.app-banner.index')
         ->with('success','Post updated successfully');

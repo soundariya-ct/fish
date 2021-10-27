@@ -68,7 +68,7 @@
                                             <div class="mb-1">
                                                 <label class="form-label">Parent Category</label>
                                                 <select class="select2 form-select" name="parent_id">
-                                                    <option value="">None</option>
+                                                    <option value="none">None</option>
                                                     @foreach($category as $key => $cat)
                                                         <option value="{{ $cat->id }}" class="optionGroup">{{ ucFirst($cat->name) }}</option>
                                                             @foreach($cat->getChildrenCategory as $key => $childcat)

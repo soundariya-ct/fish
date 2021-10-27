@@ -26,8 +26,10 @@
                                             <h4 class="card-title">Category</h4>
                                         </div>
                                         <div class="card-body">
-                                            {{ Form::model(['route' => [ "admin.app-banner.update", $id],'method' => 'PUT', 'class' => 'form-horizontal']) }}
+                                            <form class="form" method="POST" action="{{ route('admin.app-banner.update', $id) }}" enctype="multipart/form-data">
+                                            {{-- {{ Form::model(['route' => [ "admin.app-banner.update", $id],'method' => 'POST', 'class' => 'form-horizontal']) }} --}}
                                             @csrf
+                                            @method('PUT')
                                                 <div class="row">
                                                     <div class="col-md-6 col-12">
                                                         <div class="mb-1">
@@ -42,8 +44,8 @@
                                                         <button type="submit" class="btn btn-primary me-1">Submit</button>
                                                     </div>
                                                 </div>
-                                            {{ Form::close() }}
-
+                                            {{-- {{ Form::close() }} --}}
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -56,4 +58,4 @@
         </div>
     </div>
 @endsection
- 
+

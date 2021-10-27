@@ -126,7 +126,9 @@ class ProductController extends Controller
             ->with('getChildrenCategory')
             ->active()->get();
         $data = Product::find($id);
-        return view('admin.product.edit', compact('data', 'category'));
+        $pieces = Slice::get();
+ 
+        return view('admin.product.edit', compact('data', 'category', 'pieces'));
     }
 
     /**
@@ -235,18 +237,19 @@ class ProductController extends Controller
 
     public function slices(Request $request)
     {
-        dd($request);
-        if ($request->hasFile('slice_image')) {
-            $path = $request->file('slice_image')->store('public/images');
+        foreach($request->products as $slice) {
+            if(isset($slice['slice_image']) && !empty($slice['slice_image']) ) {
+                $path = $slice['slice_image']->store('public/images');
+                $save = new Slice;
+                $save->slice_image = $path;
+                $save->name = $slice['name'];
+                $save->num_of_pieces = $slice['pieces'];
+                $save->product_id = $request->id;
+                Product::where('id', $request->id)
+                        ->update(array('is_product_customizeable' => $request->is_customizable_product));
+                $save->save();
+            }
         }
-        $save = new Slice;
-        $save->slice_image = $path;
-        $save->name = $request->name;
-        $save->num_of_pieces = $request->pieces;
-        $save->product_id = $request->id;
-        http_response_code(500);
-        dd($save);
-        $save->save();
 
         return redirect()->route('admin.product.index')->with('success', 'Product Gallery Deleted Successfully');
 

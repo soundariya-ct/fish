@@ -39,12 +39,20 @@
                                                             @enderror
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-6 col-12">
+                                                        <div class="mb-1">
+                                                            {{ Form::label('product_id', 'Product', ['class' => 'custom-file-label']) }}
+                                                            {{ Form::select('product_id', $products ,null, ['class' => 'custom-file-input form-control']) }}
+                                                            @error('tamil_name')
+                                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
                                                     <div class="col-12">
                                                         <button type="submit" class="btn btn-primary me-1">Submit</button>
                                                     </div>
                                                 </div>
                                             {{ Form::close() }}
-                                        
                                         </div>
                                     </div>
                                 </div>
@@ -109,7 +117,7 @@
         </div>
     </div>
 @endsection
-@section('javascript')
+@push('scripts')
 <script>
    $(function(){
         @include('admin.layouts.errors')
@@ -139,4 +147,4 @@
    })
 
 </script>
-@endsection
+@endpush

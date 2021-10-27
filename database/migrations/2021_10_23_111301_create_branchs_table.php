@@ -13,7 +13,7 @@ class CreateBranchsTable extends Migration
      */
     public function up()
     {
-        Schema::create('branchs', function (Blueprint $table) {
+        Schema::create('branches', function (Blueprint $table) {
             $table->id();
             $table->string('branch_name')->unique();
             $table->integer('branch_code');
@@ -35,6 +35,6 @@ class CreateBranchsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('branchs');
+        Schema::dropIfExists('branches');
     }
 }

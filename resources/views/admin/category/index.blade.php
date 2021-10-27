@@ -97,7 +97,7 @@
 </div>
 </div>
 @endsection
-@section('javascript')
+@push('scripts')
 <script>
    $(function(){
         @include('admin.layouts.errors')
@@ -127,4 +127,4 @@
    })
 
 </script>
-@endsection
+@endpush

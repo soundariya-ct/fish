@@ -22,6 +22,15 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="col-md-6 col-12">
+                                <div class="mb-1">
+                                    {{ Form::label('banner_image', 'Banner Image', ['class' => 'custom-file-label']) }}
+                                    {{ Form::file('banner_image', ['class' => 'custom-file-input form-control']) }}
+                                    @error('tamil_name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary me-1">Submit</button>

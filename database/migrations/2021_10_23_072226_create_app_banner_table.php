@@ -15,6 +15,7 @@ class CreateAppBannerTable extends Migration
     {
         Schema::create('app_banner', function (Blueprint $table) {
             $table->id();
+            $table->integer('product_id')->nullable();
             $table->string('banner_image')->nullable();
             $table->timestamps();
         });

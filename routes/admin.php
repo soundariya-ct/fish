@@ -6,9 +6,10 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\AppBannerController;
+use App\Http\Controllers\Admin\BranchController;
+
 
 Route::prefix(env('ADMIN_PREFIX'))->name('admin.')->group(function(){
-
 
     //Login Routes
     Route::get('/login',[LoginController::class,'showLoginForm'])->name('login');
@@ -16,9 +17,7 @@ Route::prefix(env('ADMIN_PREFIX'))->name('admin.')->group(function(){
     Route::post('/logout',[LoginController::class,'logout'])->name('logout');
 });
 
-
 Auth::routes();
-
 
 Route::prefix(env('ADMIN_PREFIX'))->name('admin.')->middleware(['auth:admin'])->group(function(){
 
@@ -40,6 +39,9 @@ Route::prefix(env('ADMIN_PREFIX'))->name('admin.')->middleware(['auth:admin'])->
     Route::post('/product/slices', [ProductController::class, 'slices'])->name('product.slices');
 
     Route::resource('product', ProductController::class);
+
+    //Branch
+    Route::resource('branch', BranchController::class);
 
     //File Uploader
     Route::post('/fileUploadEditor', [HomeController::class,'fileUploadEditor'])->name('fileUploadEditor');
