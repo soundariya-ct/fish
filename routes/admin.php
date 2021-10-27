@@ -41,6 +41,7 @@ Route::prefix(env('ADMIN_PREFIX'))->name('admin.')->middleware(['auth:admin'])->
     Route::resource('product', ProductController::class);
 
     //Branch
+    Route::get('branch/{id}/delete', [BranchController::class, 'destroy'])->name('branch.delete');
     Route::resource('branch', BranchController::class);
 
     //File Uploader

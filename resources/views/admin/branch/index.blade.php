@@ -67,7 +67,7 @@
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Basic example">
                                                     <a href="{{ route('admin.branch.edit',$branch->id) }}" class="btn btn-primary waves-effect waves-float waves-light"><i data-feather="edit-2" class="me-50"></i></a>
-                                                    <button type="button" class="btn btn-primary waves-effect waves-float waves-light delete" data-href="{{ route('admin.branch.destroy',$branch->id) }}"><i data-feather="trash" class="me-50"></i></button>
+                                                    <button type="button" class="btn btn-primary waves-effect waves-float waves-light delete" data-href="{{ route('admin.branch.delete',$branch->id) }}"><i data-feather="trash" class="me-50"></i></button>
                                                 </div>
                                             </td>
                                         </tr>

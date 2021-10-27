@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Branch;
 
+
 use App\Traits\ImageTrait;
 
 class BranchController extends Controller
@@ -33,7 +34,7 @@ class BranchController extends Controller
      */
     public function create()
     {
-        return view('admin.branch.create' );
+        return view('admin.branch.create');
     }
 
     /**
@@ -94,55 +95,40 @@ class BranchController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(request('slug') != null){
-            $request['slug']  = Str::slug(request('slug'),'-');
-        }else{
-            $request['slug']  = Str::slug(request('name'),'-');
-        }
 
         $this->validate(request(),[
-            'name' => 'required|unique:categories,name,'.$id,
-            'slug' => 'required|alpha_dash|unique:categories,slug,'.$id,
+            'branch_name' => 'required',
+            'branch_code' => 'required',
+            'country' => 'required',
+            'state' => 'required',
+            'city' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'lat' => 'required',
+            'long' => 'required',
         ]);
 
-        $path = null;
+        $branch = Branch::find($id);
+        $branch->branch_name =  $request->get('branch_name');
+        $branch->branch_code = $request->get('branch_code');
+        $branch->country = $request->get('country');
+        $branch->state = $request->get('state');
+        $branch->city = $request->get('city');
+        $branch->phone = $request->get('phone');
+        $branch->address = $request->get('address');
+        $branch->lat = $request->get('lat');
+        $branch->long = $request->get('long');
 
-        if($request->file('image')){
-            $file = $request->file('image');
-            $file_arr = $this->upload_file($file,'category');
-            $path = $file_arr['db_path'];
-        }
+        $branch->save();
 
-        $datas = [
-            'name' => $request->name,
-            'slug' => $request->slug,
-            'parent_id' => $request->parent_id,
-            'status' => $request->status,
-            'meta_title' => $request->meta_title,
-            'meta_keywords' => $request->meta_keywords,
-            'meta_description' => $request->meta_description,
-            'image' => $path
-        ];
-
-        if($path == null){
-            unset($datas['image']);
-        }
-
-        Category::where('id',$id)->update($datas);
-        return redirect()->route('admin.category.index')->with('success','Category Updated Successfully');
+        return redirect()->route('admin.branch.index')->with('success','Branch Updated Successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        Category::find($id)->delete();
-        return redirect()->route('admin.category.index')->with('success','Category Deleted Successfully');
-    }
+        Branch::find($id)->delete();
 
+        return redirect()->route('admin.branch.index')->with('success','Category Deleted Successfully');
+    }
 
 }
