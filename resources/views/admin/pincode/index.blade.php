@@ -8,12 +8,12 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-start mb-0">Branch</h2>
+                        <h2 class="content-header-title float-start mb-0">Pincode</h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a>
                                 </li>
-                                <li class="breadcrumb-item active">Branch
+                                <li class="breadcrumb-item active">Pincode
                                 </li>
                             </ol>
                         </div>
@@ -25,7 +25,7 @@
                     <div class="dropdown">
                         <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="grid"></i></button>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item" href="{{ route('admin.branch.create') }}"><i class="me-1" data-feather="plus-square"></i><span class="align-middle">Create</span></a>
+                            <a class="dropdown-item" href="{{ route('admin.pincode.create') }}"><i class="me-1" data-feather="plus-square"></i><span class="align-middle">Create</span></a>
                         </div>
                     </div>
                 </div>
@@ -37,37 +37,27 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Category</h4>
+                    <h4 class="card-title">Pincode</h4>
                 </div>
                 <div class="card-body">
                         <div class="table-responsive table-bordered">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Branch Name</th>
-                                        <th>Branch Code</th>
-                                        <th>State</th>
-                                        <th>City</th>
-                                        <th>Country</th>
-                                        <th>Address</th>
-                                        <th>Phone</th>
+                                        <th>Pincode</th>
+                                        <th>Is Available</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($branches as $branch)
+                                    @forelse ($pincodes as $pincode)
                                         <tr>
-                                            <td>{{ $branch->branch_name }}</td>
-                                            <td>{{ $branch->branch_code }}</td>
-                                            <td>{{ $branch->country->name }}</td>
-                                            <td>{{ $branch->state->name }}</td>
-                                            <td>{{ $branch->city->name }}</td>
-                                            <td>{{ $branch->phone }}</td>
-                                            <td>{{ $branch->address }}</td>
+                                            <td>{{ $pincode->pincode }}</td>
+                                            <td>{!! $pincode->status_text !!}</td>
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <a href="{{ route('admin.branch.edit',$branch->id) }}" class="btn btn-primary waves-effect waves-float waves-light"><i data-feather="edit-2" class="me-50"></i></a>
-                                                    <button type="button" class="btn btn-primary waves-effect waves-float waves-light delete" data-href="{{ route('admin.branch.delete',$branch->id) }}"><i data-feather="trash" class="me-50"></i></button>
+                                                    <a href="{{ route('admin.pincode.edit',$pincode->id) }}" class="btn btn-primary waves-effect waves-float waves-light"><i data-feather="edit-2" class="me-50"></i></a>
+                                                    <button type="button" class="btn btn-primary waves-effect waves-float waves-light delete" data-href="{{ route('admin.pincode.delete',$pincode->id) }}"><i data-feather="trash" class="me-50"></i></button>
                                                 </div>
                                             </td>
                                         </tr>

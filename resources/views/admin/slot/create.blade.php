@@ -8,12 +8,12 @@
                     <div class="content-header-left col-md-9 col-12 mb-2">
                         <div class="row breadcrumbs-top">
                             <div class="col-12">
-                                <h2 class="content-header-title float-start mb-0">Branch</h2>
+                                <h2 class="content-header-title float-start mb-0">Slot</h2>
                                 <div class="breadcrumb-wrapper">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a>
                                         </li>
-                                        <li class="breadcrumb-item active">Branch
+                                        <li class="breadcrumb-item active">Slot
                                         </li>
                                     </ol>
                                 </div>
@@ -38,10 +38,9 @@
                                         <h4 class="card-title">Branch</h4>
                                     </div>
                                     <div class="card-body">
-                                        {{ Form::open(['route' => ['admin.branch.update', $branch->id], 'method' => 'POST', 'class' => 'invoice-repeater' ]) }}
+                                        {{ Form::open(['route' => 'admin.slot.store', 'method' => 'POST', 'class' => 'invoice-repeater' ]) }}
                                             @csrf
-                                            @method('PUT')
-                                            @include('admin.branch.form')
+                                            @include('admin.slot.form')
                                         {{ Form::close() }}
                                     </div>
                                 </div>

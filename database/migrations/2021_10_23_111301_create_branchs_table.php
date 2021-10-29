@@ -17,9 +17,9 @@ class CreateBranchsTable extends Migration
             $table->id();
             $table->string('branch_name')->unique();
             $table->integer('branch_code');
-            $table->string('country');
-            $table->string('state');
-            $table->string('city');
+            $table->integer('country_id');
+            $table->integer('state_id');
+            $table->integer('city_id');
             $table->decimal('long', 10, 7);
             $table->decimal('lat', 10, 7);
             $table->bigInteger('phone');

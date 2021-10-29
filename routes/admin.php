@@ -7,7 +7,8 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\AppBannerController;
 use App\Http\Controllers\Admin\BranchController;
-
+use App\Http\Controllers\Admin\SlotController;
+use App\Http\Controllers\Admin\PincodeController;
 
 Route::prefix(env('ADMIN_PREFIX'))->name('admin.')->group(function(){
 
@@ -42,7 +43,18 @@ Route::prefix(env('ADMIN_PREFIX'))->name('admin.')->middleware(['auth:admin'])->
 
     //Branch
     Route::get('branch/{id}/delete', [BranchController::class, 'destroy'])->name('branch.delete');
+    Route::post('get-state', [BranchController::class, 'getState'])->name('branch.getState');
+    Route::post('get-cities',[BranchController::class, 'getCity'])->name('branch.getCity');
     Route::resource('branch', BranchController::class);
+
+    //Slot
+    Route::get('slot/{id}/delete', [SlotController::class, 'destroy'])->name('slot.delete');
+    Route::resource('slot', SlotController::class);
+
+    //Pincode
+    Route::get('pincode/{id}/delete', [PincodeController::class, 'destroy'])->name('pincode.delete');
+    Route::resource('pincode', PincodeController::class);
+
 
     //File Uploader
     Route::post('/fileUploadEditor', [HomeController::class,'fileUploadEditor'])->name('fileUploadEditor');

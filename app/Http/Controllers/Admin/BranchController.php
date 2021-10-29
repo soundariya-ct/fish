@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Branch;
+use App\Models\Country;
+use App\Models\State;
+use App\Models\City;
+
 
 
 use App\Traits\ImageTrait;
@@ -34,7 +38,9 @@ class BranchController extends Controller
      */
     public function create()
     {
-        return view('admin.branch.create');
+        $country = Country::pluck('name', 'id')->toArray();
+
+        return view('admin.branch.create', compact('country'));
     }
 
     /**
@@ -48,9 +54,9 @@ class BranchController extends Controller
         $this->validate(request(),[
             'branch_name' => 'required',
             'branch_code' => 'required',
-            'country' => 'required',
-            'state' => 'required',
-            'city' => 'required',
+            'country_id' => 'required',
+            'state_id' => 'required',
+            'city_id' => 'required',
             'phone' => 'required',
             'address' => 'required',
             'lat' => 'required',
@@ -81,9 +87,16 @@ class BranchController extends Controller
      */
     public function edit($id)
     {
-        $data = Branch::find($id);
+        $branch =  Branch::find($id);
+        $data['branch'] =  $branch;
+        $data['country_name'] = Country::find($branch->country_id)->id;
+        $data['state_name'] = State::find($branch->state_id)->id;
+        $data['city_name'] = City::find($branch->city_id)->id;
+        $data['country'] = Country::pluck('name', 'id')->toArray();
+        $data['state'] = State::where('id', $branch->state_id)->pluck('name', 'id')->toArray();
+        $data['city'] = City::where('id', $branch->city_id)->pluck('name', 'id')->toArray();
 
-        return view('admin.branch.edit',compact('data'));
+        return view('admin.branch.edit', $data);
     }
 
     /**
@@ -99,9 +112,9 @@ class BranchController extends Controller
         $this->validate(request(),[
             'branch_name' => 'required',
             'branch_code' => 'required',
-            'country' => 'required',
-            'state' => 'required',
-            'city' => 'required',
+            'country_id' => 'required',
+            'state_id' => 'required',
+            'city_id' => 'required',
             'phone' => 'required',
             'address' => 'required',
             'lat' => 'required',
@@ -111,9 +124,9 @@ class BranchController extends Controller
         $branch = Branch::find($id);
         $branch->branch_name =  $request->get('branch_name');
         $branch->branch_code = $request->get('branch_code');
-        $branch->country = $request->get('country');
-        $branch->state = $request->get('state');
-        $branch->city = $request->get('city');
+        $branch->country_id = $request->get('country_id');
+        $branch->state_id = $request->get('state_id');
+        $branch->city_id = $request->get('city_id');
         $branch->phone = $request->get('phone');
         $branch->address = $request->get('address');
         $branch->lat = $request->get('lat');
@@ -131,4 +144,18 @@ class BranchController extends Controller
         return redirect()->route('admin.branch.index')->with('success','Category Deleted Successfully');
     }
 
+    public function getState(Request $request)
+    {
+        $data['states'] = State::where("country_id",$request->country_id)
+                        ->get(["name","id"]);
+
+        return response()->json($data);
+    }
+
+    public function getCity(Request $request)
+    {
+        $data['cities'] = City::where("state_id",$request->state_id)
+                        ->get(["name","id"]);
+        return response()->json($data);
+    }
 }

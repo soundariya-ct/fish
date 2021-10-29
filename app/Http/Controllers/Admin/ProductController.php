@@ -127,7 +127,7 @@ class ProductController extends Controller
             ->active()->get();
         $data = Product::find($id);
         $pieces = Slice::get();
- 
+
         return view('admin.product.edit', compact('data', 'category', 'pieces'));
     }
 
@@ -251,7 +251,7 @@ class ProductController extends Controller
             }
         }
 
-        return redirect()->route('admin.product.index')->with('success', 'Product Gallery Deleted Successfully');
+        return redirect()->route('admin.product.edit', $request->id)->with('success', 'Product Gallery Deleted Successfully');
 
     }
 }

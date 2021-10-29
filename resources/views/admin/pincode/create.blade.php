@@ -8,12 +8,12 @@
                     <div class="content-header-left col-md-9 col-12 mb-2">
                         <div class="row breadcrumbs-top">
                             <div class="col-12">
-                                <h2 class="content-header-title float-start mb-0">Branch</h2>
+                                <h2 class="content-header-title float-start mb-0">Pincode</h2>
                                 <div class="breadcrumb-wrapper">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a>
                                         </li>
-                                        <li class="breadcrumb-item active">Branch
+                                        <li class="breadcrumb-item active">Pincode
                                         </li>
                                     </ol>
                                 </div>
@@ -25,7 +25,7 @@
                             <div class="dropdown">
                                 <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="grid"></i></button>
                                 <div class="dropdown-menu dropdown-menu-end">
-                                    <a class="dropdown-item" href="{{ route('admin.branch.create') }}"><i class="me-1" data-feather="plus-square"></i><span class="align-middle">Create</span></a>
+                                    <a class="dropdown-item" href="{{ route('admin.pincode.create') }}"><i class="me-1" data-feather="plus-square"></i><span class="align-middle">Create</span></a>
                                 </div>
                             </div>
                         </div>
@@ -35,13 +35,12 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4 class="card-title">Branch</h4>
+                                        <h4 class="card-title">Pincode</h4>
                                     </div>
                                     <div class="card-body">
-                                        {{ Form::open(['route' => ['admin.branch.update', $branch->id], 'method' => 'POST', 'class' => 'invoice-repeater' ]) }}
+                                        {{ Form::open(['route' => 'admin.pincode.store', 'method' => 'POST', 'class' => 'invoice-repeater' ]) }}
                                             @csrf
-                                            @method('PUT')
-                                            @include('admin.branch.form')
+                                            @include('admin.pincode.form')
                                         {{ Form::close() }}
                                     </div>
                                 </div>
