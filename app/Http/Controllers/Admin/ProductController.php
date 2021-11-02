@@ -251,7 +251,7 @@ class ProductController extends Controller
             }
         }
 
-        return redirect()->route('admin.product.edit', $request->id)->with('success', 'Product Gallery Deleted Successfully');
+        return redirect()->route('admin.product.edit',$request->id)->with('success', 'Product Gallery Deleted Successfully');
 
     }
 }
