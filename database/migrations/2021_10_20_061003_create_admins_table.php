@@ -20,6 +20,9 @@ class CreateAdminsTable extends Migration
             $table->string('password',255);
             $table->integer('pincode');
             $table->integer('status')->default(1)->comment('0= inactive,1= active');
+            $table->integer('otp');
+            $table->biginteger('phone');
+            $table->integer('referral_code');
             $table->rememberToken();
             $table->timestamps();
         });

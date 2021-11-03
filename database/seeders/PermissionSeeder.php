@@ -24,8 +24,8 @@ class PermissionSeeder extends Seeder
 
             if($action['prefix'] == '/rrkadminmanager'){
                 if($name = @$action['as']){
-                     
-                    Permission::firstOrcreate(['name' => $name]);
+
+                    Permission::firstOrcreate(['name' => $name, 'guard_name' => 'admin']);
                 }
             }
         }

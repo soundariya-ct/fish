@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\AppBannerController;
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\SlotController;
 use App\Http\Controllers\Admin\PincodeController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\UserController;
 
 Route::prefix(env('ADMIN_PREFIX'))->name('admin.')->group(function(){
 
@@ -58,4 +60,7 @@ Route::prefix(env('ADMIN_PREFIX'))->name('admin.')->middleware(['auth:admin'])->
 
     //File Uploader
     Route::post('/fileUploadEditor', [HomeController::class,'fileUploadEditor'])->name('fileUploadEditor');
+
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
 });

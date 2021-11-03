@@ -13,4 +13,6 @@ class Permission extends \Spatie\Permission\Models\Permission
     protected $table ="permissions";
 
     public $incrementing = false;
+    
+    protected $fillable = ['name', 'guard_name'];
 }
