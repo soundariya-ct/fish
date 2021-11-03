@@ -19,7 +19,7 @@ class AdminUserSeeder extends Seeder
     {
 
         $user = Admin::create([
-            'name' => 'Manager',
+            'name' => 'Admin',
             'email' => 'admin@codetez.com',
             'password' => bcrypt('12345678'),
             'status' => 1,
@@ -30,13 +30,16 @@ class AdminUserSeeder extends Seeder
 
         ]);
             $role = Role::create([
-                    'name' => 'manager',
+                    'name' => 'admin',
                     'guard_name' => 'admin',
                     ]);
-                    $role->givePermissionTo(Permission::all());
-                // $permissions = Permission::pluck('id','id')->all();
+                    // $role->givePermissionTo(Permission::all());
 
-                $user->assignRole('manager');
+                $permissions = Permission::pluck('id','id')->all();
+
+                $role->syncPermissions($permissions);
+
+                $user->assignRole($role->id);
 
         // Admin::insert($datas);
         }

@@ -26,6 +26,37 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="otp" class="col-md-4 col-form-label text-md-right">{{ __('Otp') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="otp" type="number" class="form-control @error('otp') is-invalid @enderror" name="otp" value="{{ old('otp') }}" required autocomplete="name" autofocus>
+
+                                @error('otp')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="phone" type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="name" autofocus>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="referral_code" class="col-md-4 col-form-label text-md-right">{{ __('referral_code') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="referral_code" type="text" class="form-control @error('referral_code') is-invalid @enderror" name="referral_code" value="{{ old('referral_code') }}" required autocomplete="name" autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">

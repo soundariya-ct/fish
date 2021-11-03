@@ -3,9 +3,21 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
+
+    public function boot()
+    {
+        Blade::if('hasAccess', function ($route) {
+            return \App\Helpers\SecurityHelper::hasAccess($route);
+        });
+
+        Schema::defaultStringLength(191);
+    }
+
     /**
      * Register any application services.
      *
@@ -21,8 +33,5 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
-        //
-    }
+
 }
