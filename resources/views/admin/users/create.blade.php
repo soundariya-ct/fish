@@ -1,0 +1,109 @@
+@extends('admin.layouts.master')
+@section('content')
+<div class="app-content content ">
+    <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+            <div class="content-wrapper container-xxl p-0">
+                <div class="content-header row">
+                    <div class="content-header-left col-md-9 col-12 mb-2">
+                        <div class="row breadcrumbs-top">
+                            <div class="col-12">
+                                <h2 class="content-header-title float-start mb-0">User</h2>
+                                <div class="breadcrumb-wrapper">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a>
+                                        </li>
+                                        <li class="breadcrumb-item active">User
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
+                        <div class="mb-1 breadcrumb-right">
+                            <div class="dropdown">
+                                <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="grid"></i></button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item" href="{{ route('admin.pincode.create') }}"><i class="me-1" data-feather="plus-square"></i><span class="align-middle">Create</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <section id="multiple-column-form">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">User</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        {!! Form::open(array('route' => 'admin.users.store','method'=>'POST')) !!}
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-md-6 col-12">
+                                                    <div class="mb-1">
+                                                        <strong>Name:</strong>
+                                                        {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="mb-1">
+                                                        <strong>Email:</strong>
+                                                        {!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="mb-1">
+                                                        <strong>Otp:</strong>
+                                                        {!! Form::text('otp', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="mb-1">
+                                                        <strong>Phone:</strong>
+                                                        {!! Form::number('phone', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="mb-1">
+                                                        <strong>Referral Code:</strong>
+                                                        {!! Form::number('referral_code', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="mb-1">
+                                                        <strong>Password:</strong>
+                                                        {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control')) !!}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="mb-1">
+                                                        <strong>Confirm Password:</strong>
+                                                        {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control')) !!}
+                                                    </div>
+                                                </div><div class="col-md-6 col-12">
+                                                    <div class="mb-1">
+                                                        <strong>Role:</strong>
+                                                        {!! Form::select('roles[]',   $roles,  [], array('class' => 'form-control','multiple')) !!}
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-12">
+                                                    <button type="submit" class="btn btn-primary me-1">Submit</button>
+                                                </div>
+                                            </div>
+
+                                        {{ Form::close() }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            <!-- Basic Tables end -->
+        </div>
+    </div>
+</div>
+@endsection

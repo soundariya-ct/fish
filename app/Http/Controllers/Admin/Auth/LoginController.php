@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
@@ -90,5 +92,9 @@ class LoginController extends Controller
                 ->back()
                 ->withInput()
                 ->with('error','Login failed, please try again!');
+    }
+
+    public function username(){
+        return 'phone_number';
     }
 }

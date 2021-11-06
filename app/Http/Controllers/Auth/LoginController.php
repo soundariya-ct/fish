@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -28,6 +30,21 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    public function login(Request $request)
+    {
+        $data = $request->validate([
+            'phone' => ' required',
+            'otp' => 'required'
+        ]);
+
+        $user = User::where('phone', $request->phone)->first();
+
+        $token = $user->createToken('API Token')->accessToken;
+
+        return response(['user' => auth()->user(), 'token' => $token]);
+
+    }
+
     /**
      * Create a new controller instance.
      *
@@ -36,5 +53,9 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function username(){
+        return 'phone';
     }
 }
